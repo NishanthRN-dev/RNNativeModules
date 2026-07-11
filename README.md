@@ -23,6 +23,16 @@ Document scanner using Google ML Kit SDK.
 |--------|-------------|
 | `scanDocument(pageLimit)` | Opens camera scanner, returns image URI |
 
+**How it works:**
+
+1. JS calls `scanDocument(pageLimit)` → Promise created
+2. Native module configures ML Kit options (page limit, formats, scanner mode)
+3. ML Kit opens built-in camera UI — no custom camera code needed
+4. ML Kit detects document edges, auto crops, removes shadows, fixes rotation
+5. User confirms scan → `onActivityResult` receives scanned image
+6. Native module resolves Promise with image URI back to JS
+7. JS displays scanned image using the returned URI
+
 ## Project Structure
 
 ```
